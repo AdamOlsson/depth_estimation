@@ -1,3 +1,6 @@
+# Note
+This is a copy of the google-research/depth_and_motion_learning repository with changes to fit a personal project. The original repository can be found here https://github.com/google-research/google-research/tree/master/depth_and_motion_learning
+
 # Unsupervised Monocular Depth and Motion Learning
 
 This release supports joint training a depth prediction model and a motion
