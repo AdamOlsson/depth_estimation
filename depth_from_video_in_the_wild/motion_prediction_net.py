@@ -49,8 +49,8 @@ def add_intrinsics_head(bottleneck, image_height, image_width):
             activation_fn=tf.nn.softplus,
             weights_regularizer=None,
             scope='foci'),
-        axis=(1, 2)) * tf.to_float(
-            tf.convert_to_tensor([[image_width, image_height]]))
+        axis=(1, 2)) * tf.cast(
+            tf.convert_to_tensor([[image_width, image_height]]), tf.float32)
 
     # The pixel offsets tend to be around the center of the image, and they
     # are typically a fraction the image width and height in pixels. We thus
@@ -65,8 +65,8 @@ def add_intrinsics_head(bottleneck, image_height, image_width):
             weights_regularizer=None,
             biases_initializer=None,
             scope='offsets'),
-        axis=(1, 2)) + 0.5) * tf.to_float(
-            tf.convert_to_tensor([[image_width, image_height]]))
+        axis=(1, 2)) + 0.5) * tf.cast(
+            tf.convert_to_tensor([[image_width, image_height]]), tf.float32)
 
     foci = tf.linalg.diag(focal_lengths)
 

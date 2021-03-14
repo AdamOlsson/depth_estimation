@@ -24,7 +24,8 @@ def main(config):
                     imagenet_norm=True)
     
     with tf.Session(config=session_config) as sess:
-        model.inference_depth(rgb_image, sess)
+        sess.run(tf.global_variables_initializer())
+        model.inference_depth(rgb_image, sess) # TODO: How to get output?
 
 if __name__ == '__main__':
     config_path = parseArgs(sys.argv[1:])

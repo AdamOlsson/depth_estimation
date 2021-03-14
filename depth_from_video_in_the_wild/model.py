@@ -180,7 +180,7 @@ class Model(object):
         object_masks_i.append(object_mask)
       object_masks.append(tf.stack(object_masks_i, axis=-1))
 
-    self.seg_stack = tf.to_float(tf.stack(object_masks, axis=0))
+    self.seg_stack = tf.cast(tf.stack(object_masks, axis=0), tf.float)
     tf.summary.image('Masks', self.seg_stack)
 
     with tf.variable_scope(DEPTH_SCOPE):
@@ -195,7 +195,7 @@ class Model(object):
       # find if non-negativity is indeed needed.
       noise_stddev = 0.5 * tf.square(
           tf.minimum(
-              tf.to_float(self.global_step) /
+              tf.cast(self.global_step, tf.float) /
               float(LAYER_NORM_NOISE_RAMPUP_STEPS), 1.0))
 
       def _normalizer_fn(x, is_train, name='bn'):
